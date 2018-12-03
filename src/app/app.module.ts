@@ -5,8 +5,13 @@ import { StoreModule} from '@ngrx/store';
 import { EffectsModule} from '@ngrx/effects';
 import { StoreRouterConnectingModule} from '@ngrx/router-store';
 
-
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+import { reducers} from './store/app.reducers';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -15,9 +20,13 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    StoreModule,
-    EffectsModule
-   // StoreRouterConnectingModule
+    AppRoutingModule,
+    SharedModule,
+    AuthModule,
+    CoreModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
+    //StoreRouterConnectingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
