@@ -5,17 +5,16 @@
   
         <div class="form-group">
           <label for="email">Mail</label>
-          <input type="email" id="email" name="email" ngModel class="form-control" required email>
+          <span *ngIf="!email.validity.valid" class="error"> - invalid</span>
+          <input type="email" id="email" name="email" ngModel class="form-control" required email #email>
         </div>
   
         <div class="form-group">
           <label for="password">Password</label>
+          <span *ngIf="!password.validity.valid" class="error"> - minimum 6 chars</span>
           <input type="password" id="password" name="password" ngModel class="form-control" required minlength="6" #password>
-          <!-- <span *ngIf="!password.validity.valid && password.hasClass('ng-touched')">bad password</span> -->
-              <!-- <span *ngIf="password.errors.required">bad password</span> -->
-         
-        
-        </div>  
+        </div> 
+        <br> 
         <button (click)="proveri(password)" type="button">provera</button>
 
         <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Sign In</button>
