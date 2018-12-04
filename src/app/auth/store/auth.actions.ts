@@ -6,6 +6,7 @@ export const TRY_SIGNIN = 'TRY_SIGNIN';
 export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
+export const FAILED = 'FAILED';
 
 export class TrySignup implements Action {
     readonly type = TRY_SIGNUP;
