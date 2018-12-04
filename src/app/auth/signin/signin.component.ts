@@ -7,7 +7,7 @@ import * as AuthActions from '../store/auth.actions';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
 

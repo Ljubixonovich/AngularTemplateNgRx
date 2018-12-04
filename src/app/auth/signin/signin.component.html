@@ -14,9 +14,8 @@
           <span *ngIf="!password.validity.valid" class="error"> - minimum 6 chars</span>
           <input type="password" id="password" name="password" ngModel class="form-control" required minlength="6" #password>
         </div> 
-        <br> 
-        <button (click)="proveri(password)" type="button">provera</button>
 
+        <br>      
         <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Sign In</button>
   
       </form>
