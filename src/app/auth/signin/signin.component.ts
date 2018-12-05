@@ -23,10 +23,4 @@ export class SigninComponent implements OnInit {
     this.store.dispatch(new AuthActions.TrySignin({username: email, password: password}));
   }
 
-  proveri(pass) {
-    console.log(pass);
-    let lj = (pass.classList.value).indexOf("ng-valid") > -1;
-
-    let xx = 3;
-  }
 }

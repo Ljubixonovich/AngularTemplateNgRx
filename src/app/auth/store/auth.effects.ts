@@ -21,13 +21,20 @@ export class AuthEffects {
                 return action.payload;
             }), 
             switchMap((authData: {username: string, password: string}) => {
-                return from(firebase.auth().createUserWithEmailAndPassword(authData.username, authData. password));
+                return from(firebase.auth().createUserWithEmailAndPassword(authData.username, authData. password))
+                    .pipe(
+                        catchError((error)=> {
+                            this.toastr.error(error, '', {timeOut: 3000});                                 
+                            return of();
+                        })
+                    )
             }),
             switchMap(() => {
                 return from(firebase.auth().currentUser.getIdToken());
             }),
             mergeMap((token: string) => {
                 this.router.navigate(['/']);
+                this.toastr.info('Successfully registered', '', {timeOut: 2000});
                 return [
                     {
                         type: AuthActions.SIGNUP
@@ -40,28 +47,9 @@ export class AuthEffects {
             })
         );
 
-
-        // @Effect()
-        // search$: Observable<Action> = this.actions$
-        //   .ofType(book.SEARCH)
-        //   .debounceTime(300)
-        //   .map(toPayload)
-        //   .switchMap(query => {
-        //     if (query === '') {
-        //       return empty();
-        //     }
-      
-        //     const nextSearch$ = this.actions$.ofType(book.SEARCH).skip(1);
-      
-        //     return this.googleBooks.searchBooks(query)
-        //       .takeUntil(nextSearch$)
-        //       .map(books => new book.SearchCompleteAction(books))
-        //       .catch(() => of(new book.SearchCompleteAction([])));
-        //   });
-
-
+        
     @Effect()
-    authSignin2: Observable<Action> = this.actions$
+    authSignin: Observable<Action> = this.actions$
         .ofType(AuthActions.TRY_SIGNIN)
         .pipe(
             map((action: AuthActions.TrySignin) => {
@@ -80,8 +68,8 @@ export class AuthEffects {
                 return from(firebase.auth().currentUser.getIdToken());                
             }),
             mergeMap((token: string) => {
-                console.log('token iz effect',token);
-                this.router.navigate(['/']);                
+                this.router.navigate(['/']); 
+                this.toastr.info('Loged in', '', {timeOut: 1000});        
                 return [
                     {
                         type: AuthActions.SIGNIN
@@ -95,42 +83,13 @@ export class AuthEffects {
         );
 
 
-
-
-    // @Effect()
-    // authSignin: Observable<any> = this.actions$
-    //     .ofType(AuthActions.TRY_SIGNIN)
-    //     .pipe(
-    //         map((action: AuthActions.TrySignin) => {
-    //             return action.payload;
-    //         }),
-    //         switchMap((authData: {username: string, password: string}) => {
-    //             return from(firebase.auth().signInWithEmailAndPassword(authData.username, authData.password));
-    //         }),
-    //         switchMap(() => {
-    //             return from(firebase.auth().currentUser.getIdToken());                
-    //         }),
-    //         mergeMap((token: string) => {
-    //             this.router.navigate(['/']);                
-    //             return [
-    //                 {
-    //                     type: AuthActions.SIGNIN
-    //                 },
-    //                 {
-    //                     type: AuthActions.SET_TOKEN,
-    //                     payload: token
-    //                 }
-    //             ];
-    //         }),
-    //     );
-
-
     @Effect({dispatch: false})
     authLogout = this.actions$
         .ofType(AuthActions.LOGOUT)
         .pipe(
             tap(() => {
                 this.router.navigate(['/']);
+                this.toastr.info('Loged out', '');
             })
         );
 
