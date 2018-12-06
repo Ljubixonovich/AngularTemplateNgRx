@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-test',
@@ -8,24 +9,24 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TestComponent implements OnInit {
 
-  constructor(private toastr: ToastrService) {} 
+  constructor() {} 
 
   ngOnInit() {   
   }
 
-  fireToastr1() {
-    this.toastr.success( 'Toastr fun!', '');
+  movies = [
+    'Episode I - The Phantom Menace',
+    'Episode II - Attack of the Clones',
+    'Episode III - Revenge of the Sith',
+    'Episode IV - A New Hope',
+    'Episode V - The Empire Strikes Back',
+    'Episode VI - Return of the Jedi',
+    'Episode VII - The Force Awakens',
+    'Episode VIII - The Last Jedi'
+  ];
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
 
-  fireToastr2() {
-    this.toastr.warning('Hello world!', 'Naslov!');
-  }
-
-  fireToastr3() {
-    this.toastr.error('Hello world!', 'Naslov!');
-  }
-
-  fireToastr4() {
-    this.toastr.info('Hello world!', 'Naslov!');
-  }
 }

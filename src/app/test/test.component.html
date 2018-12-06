@@ -1,6 +1,23 @@
 <h3>Test Page</h3>
 
-<button (click)="fireToastr1()">green - success</button>
-<button (click)="fireToastr2()">orange - warning</button>
-<button (click)="fireToastr3()">red - error</button>
-<button (click)="fireToastr4()">blue - info</button>
+<mat-form-field color="accent">
+    <mat-label>Inherited calendar color</mat-label>
+    <input matInput [matDatepicker]="picker1">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field color="accent">
+    <mat-label>Custom calendar color</mat-label>
+    <input matInput [matDatepicker]="picker2">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+</mat-form-field>
+
+<br>
+<hr>
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+</div>
+
+

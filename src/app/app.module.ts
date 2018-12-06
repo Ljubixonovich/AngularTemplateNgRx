@@ -19,9 +19,10 @@ import { TestComponent } from './test/test.component';
     AppComponent,
     TestComponent
   ],
-  imports: [
-    SharedModule,
+  imports: 
+  [
     BrowserModule,
+    SharedModule,    
     HttpClientModule,
     AppRoutingModule,
     AuthModule,

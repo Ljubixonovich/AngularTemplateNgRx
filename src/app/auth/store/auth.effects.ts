@@ -89,7 +89,7 @@ export class AuthEffects {
         .pipe(
             tap(() => {
                 this.router.navigate(['/']);
-                this.toastr.info('Loged out', '');
+                this.toastr.warning('Loged out', '');
             })
         );
 

@@ -1,3 +1,7 @@
 nav {
     background-color: rgb(250, 182, 36);
 }
+
+.active {
+    font-weight: bold;
+}
