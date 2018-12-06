@@ -1,3 +1,7 @@
+npm install bootstrap@4 @ngrx/store @ngrx/effects @ngrx/router-store firebase @angular/animations ngx-toastr @angular/material @angular/cdk
+
+replace AngularTemplateNgRx sa imenom aplikacije
+
 npm install 
     bootstrap@4 
     @ngrx/store 
